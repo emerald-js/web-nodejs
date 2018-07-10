@@ -1,0 +1,16 @@
+{
+  "name": "@emerald-js/web",
+  "version": "1.0.0",
+  "description": "Web provider for emerald-js",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@emerald-js/core": "^0.0.4",
+    "koa": "^2.5.1",
+    "koa-router": "^7.4.0"
+  },
+  "scripts": {
+    "prepublishOnly": "bash ./util build",
+    "postpublish": "bash ./util clean"
+  }
+}

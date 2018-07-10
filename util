@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+cd "$(dirname $0)";
+
+set -e
+
+yellow='\033[33m'
+green='\033[32m'
+clear='\033[0m'
+
+build() {
+    for input in index.coffee src{/**,}/*.coffee
+    do
+        output="$(sed 's/\.coffee$/\.js/' <<< "${input}")"
+
+        echo -e "${yellow}>${clear} ${green}${input}${clear} to ${green}${output}${clear}";
+        coffee -to "${output}" "${input}"
+    done
+}
+
+clean() {
+    rm index.js ./src/{**/,}*.js
+}
+
+if [ "$1" == "build" ]; then
+    build;
+    exit;
+fi
+
+if [ "$1" == "clean" ]; then
+    clean;
+    exit;
+fi
+
+echo -e "${green}${0} ${yellow}<cmd>${clear}"
+echo -e " commands:"
+echo -e "   ${green}build${clear} - compile CoffeeScript to JavaScript"
+echo -e "   ${green}clean${clear} - remove JavaScript files"
