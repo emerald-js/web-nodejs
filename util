@@ -8,7 +8,7 @@ green='\033[32m'
 clear='\033[0m'
 
 build() {
-    for input in index.coffee src{/**,}/*.coffee
+    for input in $(find src -name '*.coffee') index.coffee
     do
         output="$(sed 's/\.coffee$/\.js/' <<< "${input}")"
 
