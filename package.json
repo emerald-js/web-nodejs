@@ -1,6 +1,6 @@
 {
   "name": "@emerald-js/web",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Web provider for emerald-js",
   "main": "index.js",
   "license": "MIT",
