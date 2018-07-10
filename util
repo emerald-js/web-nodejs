@@ -5,6 +5,7 @@ set -e
 
 yellow='\033[33m'
 green='\033[32m'
+red='\033[31m'
 clear='\033[0m'
 
 build() {
@@ -14,11 +15,24 @@ build() {
 
         echo -e "${yellow}>${clear} ${green}${input}${clear} to ${green}${output}${clear}";
         coffee -to "${output}" "${input}"
+
+        echo "${output}" >> ._generated
     done
 }
 
 clean() {
-    rm index.js ./src/{**/,}*.js
+    if ! test -f ._generated; then
+        echo "${yellow}>${clear} nothing to clean";
+        exit;
+    fi
+
+    for file in $(cat ._generated | sort | uniq)
+    do
+        echo -e "${yellow}>${clear} deleting ${red}${file}${clear}"
+        rm "${file}"
+    done
+
+    rm ._generated
 }
 
 if [ "$1" == "build" ]; then
